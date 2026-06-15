@@ -7,8 +7,12 @@ import torch
 class Config:
     SEED = 42
     MODEL_NAME = "microsoft/deberta-v3-small"
-    NLI_MODEL_NAME = "valhalla/distilbart-mnli-12-3"  # Lightweight for fast, accurate zero-shot inference
-    MAX_LEN = 64
+    NLI_MODEL_NAME = "valhalla/distilbart-mnli-12-3"  # Used in Stage 1 only, not at inference time
+    
+    # MAX_LEN matches what was used during the final training run (4000-row, 3-way split).
+    # Training used max_len=128 explicitly; this makes it consistent across the codebase.
+    MAX_LEN = 128
+    
     BATCH_SIZE = 16
     EPOCHS = 3
     LR = 2e-5

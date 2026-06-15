@@ -1,27 +1,27 @@
 # src/pipeline_stage1.py
-import torch  
-import pandas as pd
-import numpy as np
-from tqdm import tqdm
-from transformers import pipeline
-from sklearn.metrics import cohen_kappa_score
-from src.utils import Config, seed_everything
+"""
+Stage 1 of the Support Integrity Auditor (SIA) pipeline.
 
-seed_everything()
+This module handles:
+  1. IngestionEngine - loading and cleaning the raw CRM dataset,
+     with auto-detection of column names so it works across
+     minor variations of the Kaggle source CSV.
+  2. SemanticUrgencyEvaluator - zero-shot NLI scoring of ticket
+     text into 4 urgency levels (Low/Medium/High/Critical).
+  3. OperationalLatencyEvaluator - robust MAD-based z-score
+     computation of resolution time within each Ticket Type group.
+  4. PseudoLabelGenerator - fuses S_sem and S_ops via weighted
+     average, then derives binary mismatch_label by comparing
+     inferred_severity to assigned Ticket Priority.
 
-# src/pipeline_stage1.py
-import pandas as pd
-import numpy as np
-from tqdm import tqdm
+The output of run_pipeline() is a DataFrame that contains all
+original columns plus S_sem, S_ops, inferred_severity,
+inferred_severity_label, P_assigned, severity_delta, and
+mismatch_label. This DataFrame (or its cached CSV equivalent) is
+the input to Stage 2 (train_pipeline.py).
+"""
+
 import torch
-from transformers import pipeline
-from sklearn.metrics import cohen_kappa_score
-from src.utils import Config, seed_everything
-
-seed_everything()
-
-# src/pipeline_stage1.py
-import torch
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -30,6 +30,7 @@ from sklearn.metrics import cohen_kappa_score
 from src.utils import Config, seed_everything
 
 seed_everything()
+
 
 class IngestionEngine:
     @staticmethod
