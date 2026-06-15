@@ -1,0 +1,11 @@
+Ticket ID,Ticket Subject,Ticket Description,Ticket Priority,Ticket Type,Ticket Channel,Customer Email,Resolution Time,Expected_Mismatch
+ADV-01,Billing receipt inquiry,"Dear support, I need a copy of my billing invoice for last month. This is a routine bookkeeping request.",Low,Billing Inquiry,Email,user@client.com,2.0,0
+ADV-02,Feature feedback,"Hello, we would like to suggest adding a dark mode option to the settings tab. This is just a minor feedback suggestion.",Low,Product Feedback,Chat,marketing@firm.com,4.0,0
+ADV-03,General inquiry,"Good afternoon, do you provide telephone support during weekends, or is it strictly email?",Low,General Inquiry,Chat,john@public.com,1.0,0
+ADV-04,Account profile picture,"Hi, can you explain where the button is to change my account profile picture? I cannot find it.",Low,Account Access,Email,billing@client.com,3.0,0
+ADV-05,Product documentation link,"Hello, where can I download the developer API reference manual? Is there a link available on your site?",Low,Product Feedback,Email,team@analytics.com,5.0,0
+ADV-06,Headquarters location,"Hello support, could you please tell me where your primary corporate offices are located? I am writing a short article.",Critical,General Inquiry,Email,db@enterprise.com,24.0,1
+ADV-07,Enterprise upgrade path,"Hello, our team is interested in learning more about your enterprise licensing tiers. Could you provide a sales contact?",Critical,Billing Inquiry,Phone,treasury@corp.com,48.0,1
+ADV-08,Password reset instructions,"Dear support, I would appreciate it if you could send me the documentation on how to update my account password.",High,Account Access,Email,ops@system.com,2.0,1
+ADV-09,Typo in documentation,"Hello, we noticed a small spelling discrepancy on page 10 of your PDF document. It says 'recieve' instead of 'receive'.",High,Product Feedback,Email,security@vendor.com,1.0,1
+ADV-10,Invoice logo request,"Good morning, we are requesting a high-resolution version of your logo to place on our client invoice page.",Critical,Billing Inquiry,Email,logistics@hq.com,2.0,1
