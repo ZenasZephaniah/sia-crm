@@ -45,6 +45,7 @@ class IngestionEngine:
         return None
 
     @classmethod
+    @classmethod
     def clean_crm_data(cls, filepath: str) -> pd.DataFrame:
         """
         Loads and standardizes the Kaggle Customer Support Tickets dataset by auto-detecting columns.
@@ -57,7 +58,7 @@ class IngestionEngine:
             'Ticket Subject': ['subject'],
             'Ticket Description': ['description'],
             'Ticket Priority': ['priority'],
-            'Ticket Type': ['category'],       # Maps 'Issue_Category' -> 'Ticket Type'
+            'Ticket Type': ['category'],       # Maps 'Issue_Category'. Fallback handled below.
             'Ticket Channel': ['channel'],
             'Resolution Time': ['resolution'],  # Maps 'Resolution_Time_Hours' -> 'Resolution Time'
             'Customer Email': ['email']         # Maps 'Customer_Email' -> 'Customer Email'
@@ -66,6 +67,11 @@ class IngestionEngine:
         mapped_columns = {}
         for target_key, keywords in mappings.items():
             found_col = cls.find_column(cols, keywords)
+            
+            # Dynamic Fallback: if 'category' is not found for Ticket Type, search for 'type'
+            if not found_col and target_key == 'Ticket Type':
+                found_col = cls.find_column(cols, ['type'])
+                
             if found_col:
                 mapped_columns[found_col] = target_key
             else:
@@ -89,7 +95,7 @@ class IngestionEngine:
             
         df = df[standard_cols].copy()
 
-        # Extract domain-tier feature from email: e.g. "user@corporation.com" -> "corporation.com"
+        # Extract domain-tier feature from email
         df['Customer Domain'] = df['Customer Email'].apply(
             lambda x: str(x).split('@')[-1] if '@' in str(x) else 'unknown.com'
         )
