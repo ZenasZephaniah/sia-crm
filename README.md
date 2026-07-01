@@ -96,7 +96,7 @@ Fusing these non-overlapping signals allows the auditor to build a multi-dimensi
 
 The fine-tuned model was evaluated against 10 hand-crafted adversarial tickets designed to break keyword-matching baselines:
 
-* **False Urgency (ADV-01 to ADV-05):** Low-severity requests loaded with panic keywords (e.g., *"EMERGENCY COLD CRITICAL ASAP"*). The model successfully ignored the keywords, classifying them as **Consistent (0)**.
+* **False Urgency (ADV-01 to ADV-05):** Low-severity requests loaded with panic keywords (e.g., "EMERGENCY COLD CRITICAL ASAP"). The model successfully ignored the keywords, classifying them as **Consistent (0)**.
 * **False Alarms (ADV-06 to ADV-10):** Trivial inquiries assigned a "High" or "Critical" priority. The model successfully caught these, classifying them as **Mismatched (1)**.
 
 ### Adversarial Performance Report
